@@ -4,9 +4,11 @@ import * as gptApi from './gptApi'
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 app.post('/chat', async (req, res) => {
-    var result = await gptApi.chatWithGpt(req.body.text);
-    res.status(200).send({result});
+    var conversation = await gptApi.chatWithGpt(req.body.conversation);
+    res.status(200).send({conversation});
 });
 
 app.listen(port, () => {
